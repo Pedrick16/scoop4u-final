@@ -147,10 +147,13 @@ MESSAGE_TAGS = {
 
 AUTH_USER_MODEL='landing_page.User'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "scoops4u_capstone/static"),)
+STATIC_URL = '/scoops4u_capstone/static/'
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "scoops4u_capstone/static"),)
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATICFILES_DIRS = [
+    BASE_DIR / "scoops4u_capstone/static",
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

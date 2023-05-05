@@ -26,4 +26,7 @@ urlpatterns = [
     path('reseller-site/', include('reseller_site.urls')),
     path('staff-site/', include('staff_site.urls')),
     path('rider-site/', include('rider_site.urls')),
-]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns  +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
