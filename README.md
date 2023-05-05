@@ -1,1 +1,1 @@
-# scoop4u-final
+# scoop4u-final-thesis
