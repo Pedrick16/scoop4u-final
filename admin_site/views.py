@@ -507,6 +507,7 @@ def view_product(request, productid):
 
 
 def add_product(request):
+      
         list_category = Settings_category.objects.all()	
         list_flavor = Settings_flavor.objects.all()	
         list_unit = Settings_unit.objects.all()
@@ -518,6 +519,16 @@ def add_product(request):
             # 'list_settings':list_settings
         }
         return render(request, 'admin_site/products/add_product.html',context)
+
+def settings_product_check(request):
+    settings_category = Settings_category.objects.count()
+    settings_flavor= Settings_flavor.objects.count()
+    settings_unit = Settings_unit.objects.count()
+    if settings_category == 0  and settings_flavor == 0  and settings_unit == 0:
+        messages.error(request, ("Please go to the Product settings first."))
+        return redirect('admin_site:list_product')
+    else:
+        return redirect('admin_site:add_product')
 
 #adding product for tbl product	
 @login_required(login_url='landing_page:login')
