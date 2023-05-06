@@ -220,7 +220,7 @@ class Settings_flavor(models.Model):
     settings_flavor = models.CharField(max_length=250, null=True, verbose_name='Flavor')	
     
     def __str__(self):	
-        return self.settings_unit	
+        return self.settings_flavor
 
 
 class Review(models.Model):
