@@ -51,16 +51,24 @@
     
 
     <section class="section ">
+        {% if flavor_empty or category_empty or unit_empty %}
+        <div class="empty-screenProL d-none">
+            <img src="../../../../static/img/noproducts.svg" alt="">
+            <h5>No Products</h5>
+            <p>There are currently no records of products added on the system. 
+                Go to <a href="{% url 'admin_site:settings_product' %}" style="color: #001BDE;">Settings</a> and add the flavors, categories, and units needed to add a product.
+            </p>
+        </div>
+        {% else %}
         <div class="empty-screenProL d-none modal-add-prod-empty">
             <img src="../../../../static/img/noproducts.svg" alt="">
             <h5>No Products</h5>
             <p>There are currently no records of products added on the system. 
-                <a href="{% url 'admin_site:add_product' %}" data-bs-toggle="modal" data-bs-target="#addProductEmpty">Add</a> Now.
-                <!-- <div class="modal-add-res">
-                </div> -->
+                <a href="{% url 'admin_site:add_product' %} " style="color: #001BDE;" data-bs-toggle="modal" data-bs-target="#addProductEmpty">Add</a> Now.
             </p>
         </div>
-        <a href="{% url 'admin_site:settings_product_check' %}" class="btn btn-success">click</a>
+        {% endif %}
+<!--         <a href="{% url 'admin_site:settings_product_check' %}" class="btn btn-success">click</a> -->
 
         <!-- ADD PRODUCT -->
         <div class="modal fade border-0"  id="addProductEmpty">
