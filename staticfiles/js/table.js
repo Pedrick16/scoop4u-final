@@ -314,27 +314,27 @@ $(document).ready(function () {
 
 
     // Hide OS table if empty
-    if ($("#tableRepOS > tbody > tr").length == null || $("#tableRepOS > tbody > tr").length == 0){
-        $("#tableRepOS").addClass("d-none");
-        $("#osID").addClass("d-none");
-        $(".empty-screen").removeClass("d-none");
-    }
-    else{
-        $(".empty-screen").addClass("d-none");
-        $("#tableRepOS").removeClass("d-none");
-        $("#osID").removeClass("d-none");
-    };
+//     if ($("#tableRepOS > tbody > tr").length == null || $("#tableRepOS > tbody > tr").length == 0){
+//         $("#tableRepOS").addClass("d-none");
+//         $("#osID").addClass("d-none");
+//         $(".empty-screen").removeClass("d-none");
+//     }
+//     else{
+//         $(".empty-screen").addClass("d-none");
+//         $("#tableRepOS").removeClass("d-none");
+//         $("#osID").removeClass("d-none");
+//     };
 
-    if ($("#tableRepPOS > tbody > tr").length == null || $("#tableRepPOS > tbody > tr").length == 0){
-        $("#tableRepPOS").addClass("d-none");
-        $("#posID").addClass("d-none");
-        $(".empty-screenPos").removeClass("d-none");
-    }
-    else{
-        $(".empty-screenPos").addClass("d-none");
-        $("#tableRepPOS").removeClass("d-none");
-        $("#posID").removeClass("d-none");
-    };
+//     if ($("#tableRepPOS > tbody > tr").length == null || $("#tableRepPOS > tbody > tr").length == 0){
+//         $("#tableRepPOS").addClass("d-none");
+//         $("#posID").addClass("d-none");
+//         $(".empty-screenPos").removeClass("d-none");
+//     }
+//     else{
+//         $(".empty-screenPos").addClass("d-none");
+//         $("#tableRepPOS").removeClass("d-none");
+//         $("#posID").removeClass("d-none");
+//     };
 
     // if ($('#tableRepOS').DataTable().rows().count() === 0) {
     //     $("#tableRepOS").addClass("d-none");
