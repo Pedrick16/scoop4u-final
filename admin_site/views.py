@@ -553,7 +553,7 @@ def process_product(request):
         NewActLog.role = request.user.role	
         NewActLog.activity = activity 	
         NewActLog.save()	
-        messages.success(request,("Successfully added Product."))	
+        messages.success(request,("The specified Product has been successfully added to the system."))	
         return redirect('admin_site:list_product')
         
 
