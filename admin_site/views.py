@@ -524,7 +524,7 @@ def settings_product_check(request):
     settings_category = Settings_category.objects.count()
     settings_flavor= Settings_flavor.objects.count()
     settings_unit = Settings_unit.objects.count()
-    if settings_category == 0  and settings_flavor == 0  and settings_unit == 0:
+    if settings_category == 0  or settings_flavor == 0  or settings_unit == 0:
         messages.error(request, ("Please go to the Product settings first."))
         return redirect('admin_site:list_product')
     else:
