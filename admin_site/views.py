@@ -482,12 +482,25 @@ def list_products(request):
     list_products = Product.objects.all().order_by('-id')
     list_profile = Profile.objects.filter(list_user = request.user)
     current_profile = Profile.objects.filter(list_user = request.user)
+    
+    list_category = Settings_category.objects.all()	
+    list_flavor = Settings_flavor.objects.all()	
+    list_unit = Settings_unit.objects.all()	
+
+    flavor_empty = len(list_flavor) == 0
+    category_empty = len(list_category) == 0
+    unit_empty = len(list_unit) == 0
+
 
     context = {
         'list_products':list_products,
         'sidebar': 'product',
         'list_profile': list_profile,
         'current_profile':current_profile,
+        
+        'flavor_empty' : flavor_empty,
+        'category_empty' : category_empty,
+        'unit_empty' : unit_empty,
     }
     return render(request, 'admin_site/products/product.html', context)
 
