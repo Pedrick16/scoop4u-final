@@ -536,7 +536,7 @@ def process_product(request):
         pstatus = "not available"
 
         if Product.objects.filter(Q(product_name =pname) & Q(product_flavor = flavor) & Q(product_category = pcategory) & Q(product_unit =product_unit)):	
-            messages.error(request,'Product already Exist!')	
+            messages.error(request,'Product already Exists!')	
             return redirect('admin_site:add_product')	
         else:	
             while Product.objects.filter(product_code = product_code) is None:	
@@ -559,22 +559,31 @@ def process_product(request):
 
 def edit_product(request, productid):
     product = Product.objects.get(pk = productid)
+    settings_category = Settings_category.objects.all()
+    settings_unit = Settings_unit.objects.all()
+    settings_flavor = Settings_flavor.objects.all()
     
     context = {
-        'list_product':product
+        'list_product':product,
+        'settings_category':settings_category,
+        'settings_unit':settings_unit,
+        'settings_flavor':settings_flavor,
+
+
     }
     return render(request, 'admin_site/edit/edit_product.html',context)
 
 def update_product(request, productid):
     product = Product.objects.get(pk = productid)
     product.product_name = request.POST.get('product_name')
-    product.product_category = request.POST.get('product_category')
-    product.product_unit = request.POST.get('product_unit')
+    product.product_flavor = request.POST.get('flavor')
+    product.product_category = request.POST.get('category')
+    product.product_unit = request.POST.get('unit')
     product.product_ResellerPrice = request.POST.get('reseller_price')
     product.product_price = request.POST.get('pos_price')
     product.product_status = request.POST.get('status')	
     product.save()
-    messages.success(request, ("Successfully Updated."))
+    messages.success(request, ("The Product has been successfully updated."))
     return redirect('admin_site:list_product')
     
 
@@ -846,8 +855,8 @@ def update_inventory(request, productid):
             NewActLog.role = request.user.role
             NewActLog.activity = activity 
             NewActLog.save()
-            messages.info(request,("Successfully Updated."))
-            return redirect('admin_site:inventory')  
+            messages.info(request,("The stock has been updated successfully."))
+            return redirect('admin_site:list_product')  
         else:
             get_batch = int(by_batch) + 1
             #the sum of quantity and stock
@@ -884,8 +893,8 @@ def update_inventory(request, productid):
             NewActLog.role = request.user.role
             NewActLog.activity = activity 
             NewActLog.save()
-            messages.info(request,("Record updated."))
-            return redirect('admin_site:inventory')  
+            messages.info(request,("The stock has been updated successfully."))
+            return redirect('admin_site:list_product')  
 
 
 
@@ -1171,7 +1180,7 @@ def cart_products(request, productid):
 
         # error trapping for 0 stock    
         if Cart.objects.filter(cart_user=request.user, cart_pcode = pcode):
-            messages.info(request,("Already added!"))
+            messages.info(request,("The product has already been added."))
             return redirect('admin_site:pos')
         elif  product.product_stock == 0:
             messages.error(request,("No stock available!"))
@@ -1179,10 +1188,10 @@ def cart_products(request, productid):
 
         # error trapping for low stock
         elif avail_stock <  qty:
-            messages.error(request,("Stock not enough!"))
+            messages.error(request,("The available stock is not enough"))
             return redirect('admin_site:pos')
         elif product.product_status =="not available":
-            messages.error(request,("Product not available!"))
+            messages.error(request,("The product is currently unavailable."))
             return redirect('admin_site:pos')       
         else:
 
@@ -1204,7 +1213,7 @@ def cart_products(request, productid):
             
 
 
-            messages.success(request,("Added to cart."))
+            messages.success(request,("The Product has been successfully added to the cart."))
             return redirect('admin_site:pos')      
     
 
@@ -1320,7 +1329,7 @@ def completed_process(request):
         transaction = Transaction.objects.get(transaction_no = transaction_no)
         transaction.transaction_orderstatus = "Completed"
         transaction.save()
-        messages.success(request,("Successfully Delivered."))
+        messages.success(request,("The order has been successfully delivered."))
         return redirect('admin_site:transaction_completed')
 
 
@@ -1394,7 +1403,7 @@ def returned_completed(request, id):
     
     return_product.save()
 
-    messages.success(request,("Sucessfully returned."))
+    messages.success(request,("The order has been successfully returned."))
     return redirect('admin_site:returned_product')
 
 @login_required(login_url='landing_page:login')	
@@ -1409,7 +1418,7 @@ def add_returnproduct(request):
         return_product.return_date =  request.POST.get('date')	
         return_product.return_status =  "unreturned"	
         return_product.save()	
-        messages.success(request,("Successfully added."))	
+        messages.success(request,("The return order has been successfully processed and added to the system."))	
         return redirect ('admin_site:unreturned_product')
     context={	
         'product':product	
@@ -1480,21 +1489,21 @@ def settings_product(request):
 def remove_category(request, id):	
     settings = Settings_category.objects.get(pk = id)	
     settings.delete()	
-    messages.success(request,("Successfully removed."))	
+    messages.success(request,("The Product Category has been successfully removed from the system."))	
     return redirect('admin_site:settings_product')
 
 #remove unit	
 def remove_unit(request, id):	
     settings = Settings_unit.objects.get(pk = id)	
     settings.delete()	
-    messages.success(request,("Successfully removed."))	
+    messages.success(request,("The Product Unit has been successfully removed from the system."))	
     return redirect('admin_site:settings_product')
 
 #remove flavor	
 def remove_flavor(request, id):	
     settings = Settings_flavor.objects.get(pk = id)	
     settings.delete()	
-    messages.success(request,("Successfully removed"))	
+    messages.success(request,("The Product Flavor has been successfully removed from the system."))	
     return redirect('admin_site:settings_product')
 
 def settings_addcategory(request):	
@@ -1502,11 +1511,11 @@ def settings_addcategory(request):
         category = request.POST['category']	
         settings_category = Settings_category()	
         if Settings_category.objects.filter(settings_category =category ):	
-            messages.error(request,("Category already exists."))	
+            messages.error(request,("The Product Category already exists."))	
             return redirect('admin_site:settings_product')	
         else:	
             settings_category.settings_category = request.POST.get('category')
-            messages.success(request,("Category added."))
+            messages.success(request,("The Product Category has been successfully added to the system."))
             settings_category.save()	
             return redirect('admin_site:settings_product')	
     return render(request, 'admin_site/settings/addcategory_settings.html')
@@ -1516,11 +1525,11 @@ def settings_addflavor(request):
         flavor = request.POST['flavor']	
         settings_flavor = Settings_flavor()	
         if Settings_flavor.objects.filter(settings_flavor = flavor ):	
-            messages.error(request,("Flavor already exists"))	
+            messages.error(request,("The Product Flavor already exists."))	
             return redirect('admin_site:settings_product')	
         else:	
             settings_flavor.settings_flavor = request.POST.get('flavor')
-            messages.success(request,("Flavor added."))	
+            messages.success(request,("The Product Flavor has been successfully added to the system."))	
             settings_flavor.save()	
             return redirect('admin_site:settings_product')	
     return render(request, 'admin_site/settings/addflavor_settings.html')
@@ -1530,12 +1539,12 @@ def settings_addunit(request):
         unit = request.POST['unit']	
         settings_unit= Settings_unit()	
         if Settings_unit.objects.filter(settings_unit = unit ):	
-            messages.error(request,("Unit already exists"))	
+            messages.error(request,("The Product Unit already exists"))	
             return redirect('admin_site:settings_product')	
         else:	
             settings_unit.settings_unit = request.POST.get('unit')	
-            messages.success(request,("Unit added."))	
             settings_unit.save()	
+            messages.success(request,("The Product Unit has been successfully added to the system."))	
             return redirect('admin_site:settings_product')	
     return render(request, 'admin_site/settings/addunit_settings.html')
 

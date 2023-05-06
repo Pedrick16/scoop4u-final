@@ -9,12 +9,38 @@
         <label for="Product Name">Product Name</label>
         <input type="text" placeholder="Update Product Name" name="product_name" class="form-control" value="{{ list_product.product_name }}">
 
+        <label for="Product flavor">Product Flavor</label>
+        <select name="flavor" class="form-select form-control" id="gender" required >
+           
+            {% for list in settings_flavor %}
+            <option value="{{list.settings_flavor}}"{% if list_product.product_flavor == list.settings_flavor  %}selected{% endif %}>{{list.settings_flavor }}</option>
+            {% endfor %}
+                
+            
+        </select>
+
+
         <label for="Product Category">Product Category</label>
-        <input type="text" placeholder="Update Product Category" name="product_category" class="form-control" value="{{ list_product.product_category }}">
+        <select name="category" class="form-select form-control" id="gender" required >
+           
+            {% for list in settings_category %}
+            <option value="{{list.settings_category}}"{% if list_product.product_category == list.settings_category  %}selected{% endif %}>{{list.settings_category }}</option>
+            {% endfor %}
+                
+            
+        </select>
 
         <label for="Product Unit">Product Unit</label>
-        <input type="text" placeholder="Update Product Unit" name="product_unit" class="form-control" value="{{ list_product.product_unit }}">
+        <select name="unit" class="form-select form-control" id="gender" required >
+           
+            {% for list in settings_unit %}
+            <option value="{{list.settings_unit}}"{% if list_product.product_unit == list.settings_unit %}selected{% endif %}>{{list.settings_unit }}</option>
+            {% endfor %}
+                
+            
+        </select>
 
+       
         <label for="Product Unit">Reseller Price</label>
         <input type="number" placeholder="Update Reseller Price" name="reseller_price" class="form-control" value="{{ list_product.product_ResellerPrice}}">
 

@@ -51,7 +51,7 @@ def cart_reseller(request):
         for carts in cart:     	
             products = Product.objects.get(product_code = carts.cart_pcode)	
             if products.product_stock < carts.cart_quantity:	
-                messages.error(request,("Some Product out of stock"))	
+                messages.error(request,("it has been determined that some Products are currently out of stock."))	
                 return redirect('reseller_site:add_cart')
                 
     if sum_amount >= 5000:
