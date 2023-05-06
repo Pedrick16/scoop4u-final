@@ -263,7 +263,7 @@
                                         <td class="num-row"></td>
                                         <td>{{ list.settings_unit }}</td>
                                         
-                                        <form method="POST" action="{% url 'admin_site:remove_category' list.id %}" onsubmit="return submitFormunit(this);">
+                                        <form method="POST" action="{% url 'admin_site:remove_unit' list.id %}" onsubmit="return submitFormunit(this);">
                                             {% csrf_token %}
                                         <td> 
                                             <button type="submit" class="btn btn-archive"><i class="ri-delete-bin-fill"></i></button>
