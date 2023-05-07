@@ -236,6 +236,64 @@ form{
     font-family: P-Mono;
 }
 
+
+
+
+/* --------------------------------------------------------- */
+/* forgot password - send mail */
+.forgot-pass{
+    min-height: 100vh;
+    /* background-color: var(--primary-c-blue); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot-pass h1{
+    font-family: P-ExtraBold;
+    text-transform: lowercase;
+    font-size: 4.5rem;
+    text-align: center;
+    padding-bottom: 2rem;
+    line-height: 97%;
+} 
+
+.forgot-pass .title-main{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 4.3rem;
+    padding-right: 4.3rem;
+}
+
+.forgot-pass p{
+    font-size: 2rem;
+    line-height: 108%;
+    text-align: center;
+    color: var(--primary-c-black);
+}
+
+.forgot-pass span{
+    font-family: P-SemiBold;
+}
+
+.forgot-container{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.forgot-pass .form-main{
+    padding-left: 4.3rem;
+    padding-right: 4.3rem;
+}
+
+.forgot-pass a{
+    font-family: P-Bold;
+    color: var(--primary-c-blue);
+    font-size: 1.6rem;
+}
+
+
+
 /* <!-- ================== END SIGN IN ==================== -->*/
 /* --------------MEDIA QUERIES---------------- */
 /* Small devices (tablets, 768px and up) */
