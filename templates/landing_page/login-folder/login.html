@@ -37,7 +37,7 @@
                               <i class="ri-eye-fill d-none" id="eye"></i>  
                            </div>
                            <button  class="signin-btn mt-3 mb-5" type="submit" name="submit">sign in</button>
-                           <a href="{% url 'landing_page:send_email'  %}">forgot password</a>
+                           <!-- <a href="{% url 'landing_page:send_email'  %}">forgot password</a> -->
 
                            <div>
                               {% for message in messages %}
@@ -45,12 +45,9 @@
                               {% endfor %}
                            </div>
                         </form>
-                      
-                        
-
                      </div>
                      
-                     <div class="col-12 forgot d-none">
+                     <div class="col-12 forgot">
                         <p>Forgot your sign in details? <span><a href="">Get help signing in.</a></span></p>
                      </div>
                </div>
