@@ -250,7 +250,8 @@ def reset_password(request):
             user.set_password(new_password)
             user.save()
             messages.success(request, 'Your password has been changed successfully.')
-            return redirect(reverse('landing_page:login'))
+
+            return redirect(reverse('landing_page:reset_password'))
     else:
         form = ChangePasswordLanding()
     return render(request, 'landing_page/login-folder/password_reset_form.html', {'form': form})
@@ -258,16 +259,25 @@ def reset_password(request):
 
 def send_email(request):
     if request.method == "POST":
-        tile_email = "Forfot Password"
         email = request.POST['email']
-        message = request.POST['message']
-        send_mail(
-            tile_email,
-            message,
-            'settings.EMAIL_HOST_USER',
-            [email],
-            fail_silently=False)
+
+        automatic_reply_subject = "Password Reset Request"
+        automatic_reply_message = f"We received a request to change your password\n\n" \
+                                f"If it's you, kindly go to https://scoops4u.herokuapp.com/reset-password/\n\n" \
+                                f"If it isn't you, kindly ignore this email.\n\n" \
+
+        automatic_reply = EmailMessage(automatic_reply_subject, automatic_reply_message, 'blubirdmailbox@gmail.com', [email])
+        automatic_reply.reply_to = ['blubirdmailbox@gmail.com']
+        automatic_reply.send(fail_silently=False)        
+
+        # message = request.POST['message']
+        # send_mail(
+        #     tile_email,
+        #     # message,
+        #     'settings.EMAIL_HOST_USER',
+        #     [email],
+        #     fail_silently=False)
         messages.success(request, 'Please check your email.')
-        return redirect('landing_page:login')
+        return redirect('landing_page:send_email')
     
     return render(request, 'landing_page/login-folder/send_email.html')
