@@ -291,7 +291,7 @@
                             {% endif %}
                             <form action="{% url 'admin_site:pos_removeall' %}" class="remove-div" onsubmit="return removeForm(this);">
                                 {% csrf_token %}
-                                <button type="submit" id="removeAll" class="btn btn-remove btn-danger mt-4"><i class="ri-delete-bin-fill align-middle"></i><span class="align-middle ps-2">Remove All</span> </button>
+                                <button type="submit" id="removeAll" class="btn btn-remove btn-danger mt-4 d-none"><i class="ri-delete-bin-fill align-middle"></i><span class="align-middle ps-2">Remove All</span> </button>
                             </form>
                              <!-- <a href="{% url 'admin_site:pos_removeall' %}" class="btn btn-danger">Remove All</a> -->
                         </div>
@@ -299,7 +299,7 @@
                 </div>
 
                 <!-- <div class="col-xl-4 col-lg-12 col-md-12"> -->
-                <div class="col-lg-4 col-md-12" id="orderSummary">
+                <div class="col-lg-4 col-md-12 d-none" id="orderSummary">
                     <div class="card p-4" style="background-color: #E5E9F9">
                         <div class="card-body">
                             <div class="add-product">
