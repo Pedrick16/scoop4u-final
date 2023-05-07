@@ -37,6 +37,7 @@
                               <i class="ri-eye-fill" id="eye"></i>  
                            </div>
                            <button  class="signin-btn mt-3 mb-5" type="submit" name="submit">sign in</button>
+                           <a href="{% url 'landing_page:send_email'  %}">forgot password</a>
 
                            <div>
                               {% for message in messages %}

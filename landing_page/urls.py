@@ -15,4 +15,8 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('reseller/', views.reseller, name='reseller'),
+
+    path('send-email/', views.send_email, name='send_email'),
+    path('reset-password/', views.reset_password, name='reset_password'),
+
 ]

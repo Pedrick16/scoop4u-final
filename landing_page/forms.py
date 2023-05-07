@@ -78,6 +78,24 @@ class ChangePasswordForm(forms.Form):
 
     # myfield = forms.CharField(widget=forms.TextInput)
 
+class ChangePasswordLanding(forms.Form):
+    email = forms.EmailField()
+    new_password = forms.CharField(widget=forms.PasswordInput)
+    confirm_new_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError('This email does not exist in records.')
+        return email
+
+    def clean_confirm_new_password(self):
+        new_password = self.cleaned_data['new_password']
+        confirm_new_password = self.cleaned_data['confirm_new_password']
+        if new_password != confirm_new_password:
+            raise forms.ValidationError('Passwords do not match.')
+        return confirm_new_password
+
 
 class ContactForm(forms.Form):
     first_name = forms.CharField(max_length = 50, widget=forms.TextInput(attrs={'class' : 'form-control'}))

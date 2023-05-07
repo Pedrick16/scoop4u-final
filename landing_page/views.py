@@ -13,6 +13,7 @@ from .forms import ContactForm, ReviewForm
 
 from django.urls import reverse
 
+from .forms import ChangePasswordLanding
 # Create your views here.
 # home
 def landing_page(request):
@@ -237,6 +238,36 @@ def inquiry_reseller(request):
 # def review_list(request):
 #     reviews = Review.objects.all()
 #     return render(request, 'index.html', {'reviews': reviews})
- 
 
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordLanding(request.POST)
+        if form.is_valid():
+            email= form.cleaned_data['email']
+            new_password = form.cleaned_data['new_password']
+            user = User.objects.get(email=email)
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, 'Your password has been changed successfully.')
+            return redirect(reverse('landing_page:login'))
+    else:
+        form = ChangePasswordLanding()
+    return render(request, 'landing_page/login-folder/password_reset_form.html', {'form': form})
+
+
+def send_email(request):
+    if request.method == "POST":
+        tile_email = "Forfot Password"
+        email = request.POST['email']
+        message = request.POST['message']
+        send_mail(
+            tile_email,
+            message,
+            'settings.EMAIL_HOST_USER',
+            [email],
+            fail_silently=False)
+        messages.success(request, 'Please check your email.')
+        return redirect('landing_page:login')
     
+    return render(request, 'landing_page/login-folder/send_email.html')
