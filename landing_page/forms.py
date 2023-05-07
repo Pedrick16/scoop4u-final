@@ -79,9 +79,9 @@ class ChangePasswordForm(forms.Form):
     # myfield = forms.CharField(widget=forms.TextInput)
 
 class ChangePasswordLanding(forms.Form):
-    email = forms.EmailField()
-    new_password = forms.CharField(widget=forms.PasswordInput)
-    confirm_new_password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),)
+    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control', 'placeholder': 'New Password'}))
+    confirm_new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control', 'placeholder': 'Confirm New Password'}))
 
     def clean_email(self):
         email = self.cleaned_data['email']
