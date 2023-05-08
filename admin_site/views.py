@@ -448,7 +448,7 @@ def process_inquiry(request):
             return redirect('/reseller#requestForm')
 
         elif User.objects.filter(email = email):
-            messages.success(request,("Email already Exist!"))
+            messages.error(request,("Email already Exist!"))
             return redirect('/reseller#requestForm')
         else:
             reseller = Reseller(reseller_fname = f_name, reseller_mname = m_name, reseller_lname = l_name, reseller_gender = gender, reseller_contact = contact_num, reseller_address= address, reseller_email = email, reseller_id = valid_id, reseller_businessp =business_permit, reseller_status=status)
